@@ -1,0 +1,22 @@
+{
+  "name": "swe6673-project-vana",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/e-vana/SWE6673-Project-Vana.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/e-vana/SWE6673-Project-Vana/issues"
+  },
+  "homepage": "https://github.com/e-vana/SWE6673-Project-Vana#readme"
+}
