@@ -1,4 +1,4 @@
-org.jfree.chart.plot.SpiderWebPlotTest.testSerialization true
+org.jfree.chart.plot.SpiderWebPlotTest.testSerialization false
 org/jfree/data/general/DatasetChangeEvent:<init>:(Ljava/lang/Object;Lorg/jfree/data/general/Dataset;)V
 org/jfree/data/general/AbstractDataset:<init>:()V
 org/jfree/data/general/AbstractDataset:addChangeListener:(Lorg/jfree/data/general/DatasetChangeListener;)V

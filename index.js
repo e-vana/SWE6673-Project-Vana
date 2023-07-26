@@ -1,19 +1,23 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
+import { tarantula } from "./utility/tarantula.js";
+import { sbi } from "./utility/sbi.js";
+import { jaccard } from "./utility/jaccard.js";
+import { ochiai } from "./utility/ochiai.js";
 
-function readTests(cb) {
+function readTests() {
   let methodTestResultsArray = [];
   let testResults = {
     pass: 0,
     fail: 0,
     total: 0,
   };
+
   let files = fs.readdirSync("./tests");
   if (!files || files.length == 0 || typeof files == undefined) {
     throw "There was a problem reading this directory";
   }
   testResults.total = files.length;
-  let filesProcessed = 0;
   files.forEach((file) => {
     const filePath = path.join("./tests", file);
     let fname = file.split(".txt")[0];
@@ -49,6 +53,12 @@ function readTests(cb) {
             methodName: s,
             passingFileIds: [],
             failingFileIds: [],
+            suspiciousness: {
+              tarantula: 0,
+              sbi: 0,
+              jaccard: 0,
+              ochiai: 0,
+            },
           };
           if (passFailOfThisTest) {
             pl.passingFileIds.push(fname);
@@ -60,12 +70,36 @@ function readTests(cb) {
       }
     });
   });
+
+  methodTestResultsArray.forEach((method) => {
+    //run each of the tests
+    method.suspiciousness.tarantula = tarantula(
+      method.failingFileIds.length,
+      testResults.fail,
+      method.passingFileIds.length,
+      testResults.pass
+    );
+    method.suspiciousness.sbi = sbi(
+      method.failingFileIds.length,
+      method.passingFileIds.length
+    );
+    method.suspiciousness.jaccard = jaccard(
+      method.failingFileIds.length,
+      testResults.fail,
+      method.passingFileIds.length
+    );
+    method.suspiciousness.ochiai = ochiai(
+      method.failingFileIds.length,
+      testResults.fail,
+      method.passingFileIds.length
+    );
+  });
   let data = {
     methods: methodTestResultsArray,
     testSuiteInformation: testResults,
   };
   let w = fs.writeFileSync(
-    "./listOfMethods.json",
+    "./results/results.json",
     JSON.stringify(data),
     "utf-8"
   );

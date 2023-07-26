@@ -6,6 +6,7 @@
   "directories": {
     "test": "tests"
   },
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/e-vana/SWE6673-Project-Vana/issues"
   },
-  "homepage": "https://github.com/e-vana/SWE6673-Project-Vana#readme"
+  "homepage": "https://github.com/e-vana/SWE6673-Project-Vana#readme",
+  "dependencies": {
+    "ora": "^6.3.1"
+  }
 }
